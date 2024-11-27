@@ -1,0 +1,34 @@
+<header>
+  <div class="header-container">
+    <img src="/img/gato.png" alt="Logo" class="logo" />
+    <nav>
+      <ul>
+        <li>
+          <a routerLink="/" routerLinkActive="active">
+            <img src="/img/inicio.png" alt="Inicio" class="icon" />Inicio
+          </a>
+        </li>
+        <li>
+          <a routerLink="/mascotas" routerLinkActive="active">
+            <img src="/img/mascotas.png" alt="Mascotas" class="icon" />Mascotas
+          </a>
+        </li>
+        <li>
+          <a routerLink="/citas" routerLinkActive="active">
+            <img src="/img/citas.png" alt="Citas" class="icon" />Citas
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <ng-container *ngIf="username; else guestLinks">
+        <span>Bienvenido, {{ username }}</span>
+        <button class="register-btn" (click)="logout()">Cerrar Sesión</button>
+      </ng-container>
+      <ng-template #guestLinks>
+        <button class="login-btn" routerLink="/login">Login</button>
+        <button class="register-btn" routerLink="/registro">Registro</button>
+      </ng-template>
+    </div>
+  </div>
+</header>

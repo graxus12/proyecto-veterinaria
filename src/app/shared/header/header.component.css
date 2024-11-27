@@ -1,0 +1,65 @@
+/* Estilos del Header */
+header {
+    background-color: #28a745; /* Verde que aparece en tu diseño */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 70px; /* Tamaño ajustado del logo */
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 40px; /* Espaciado entre los elementos del menú */
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaciado entre el ícono y el texto */
+  }
+  
+  .icon {
+    height: 25px; /* Tamaño ajustado de los íconos */
+  }
+  
+  .auth-buttons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  button {
+    background-color: #9c27b0; /* Morado para el fondo de los botones */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    opacity: 0.8; /* Efecto de opacidad al pasar el cursor */
+  }
+  
+  .register-btn {
+    background-color: #9c27b0; /* Morado para el fondo de los botones */
+  }
+  
