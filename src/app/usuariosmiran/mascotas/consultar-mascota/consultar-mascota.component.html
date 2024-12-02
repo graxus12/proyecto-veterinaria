@@ -1,0 +1,68 @@
+<div class="mascota-detalles-container">
+  <div class="header">
+    <button class="btn-volver" (click)="volver()">Regresar</button>
+  </div>
+
+  <div class="mascota-detalles-card">
+    <div class="mascota-detalles">
+      <!-- Imagen -->
+      <div class="imagen-container">
+        <img *ngIf="mascota.foto" [src]="mascota.foto" alt="{{ mascota.nombre }}" class="mascota-foto" />
+        <p *ngIf="!mascota.foto">No hay foto disponible</p>
+      </div>
+
+      <!-- Formulario -->
+      <form (ngSubmit)="actualizarMascota()" class="formulario-mascota">
+        <h2>Datos De La Mascota</h2>
+
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input id="nombre" [(ngModel)]="mascota.nombre" name="nombre" type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="fechaNacimiento">Fecha De Nacimiento:</label>
+          <input
+            id="fechaNacimiento"
+            [(ngModel)]="mascota.fecha_nacimiento"
+            name="fechaNacimiento"
+            type="date"
+            class="form-control"
+            (change)="calcularEdad()"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="edad">Edad:</label>
+          <input id="edad" [(ngModel)]="mascota.edad" name="edad" type="text" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+          <label for="raza">Raza:</label>
+          <input id="raza" [(ngModel)]="mascota.raza" name="raza" type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="especie">Especie:</label>
+          <input id="especie" [(ngModel)]="mascota.especie" name="especie" type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="sexo">Sexo:</label>
+          <select id="sexo" [(ngModel)]="mascota.sexo" name="sexo" class="form-control">
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="peso">Peso:</label>
+          <input id="peso" [(ngModel)]="mascota.peso" name="peso" type="number" step="0.01" class="form-control" />
+          <span>Kilogramos</span>
+        </div>
+
+        <button type="submit" class="btn-actualizar">Actualizar</button>
+      </form>
+    </div>
+  </div>
+</div>

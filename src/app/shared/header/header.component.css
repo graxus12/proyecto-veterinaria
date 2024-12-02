@@ -1,65 +1,119 @@
 /* Estilos del Header */
 header {
-    background-color: #28a745; /* Verde que aparece en tu diseño */
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .header-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo {
-    height: 70px; /* Tamaño ajustado del logo */
-  }
-  
-  nav ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 40px; /* Espaciado entre los elementos del menú */
-  }
-  
-  nav ul li a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Espaciado entre el ícono y el texto */
-  }
-  
-  .icon {
-    height: 25px; /* Tamaño ajustado de los íconos */
-  }
-  
-  .auth-buttons {
-    display: flex;
-    gap: 15px;
-  }
-  
-  button {
-    background-color: #9c27b0; /* Morado para el fondo de los botones */
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px; /* Bordes redondeados */
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    opacity: 0.8; /* Efecto de opacidad al pasar el cursor */
-  }
-  
-  .register-btn {
-    background-color: #9c27b0; /* Morado para el fondo de los botones */
-  }
-  
+  background-color: #28a745;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.header-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 70px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  height: 25px;
+  margin-right: 5px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+button {
+  background-color: #9c27b0;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #7b1fa2;
+}
+
+/* Dropdown Styles */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  z-index: 10;
+  min-width: 200px;
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dropdown-menu li {
+  padding: 8px 20px;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  font-size: 14px;
+  padding: 5px 0;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f0f0f0;
+  border-radius: 3px;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}

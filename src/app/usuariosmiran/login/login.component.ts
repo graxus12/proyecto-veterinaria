@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // Para [(ngModel)]
 import { HttpClient } from '@angular/common/http'; // Para realizar solicitudes HTTP
 import { AuthService } from '../../services/services/auth.service';
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule], // Asegúrate de incluir FormsModule aquí
+  imports: [FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -25,7 +25,7 @@ export class LoginComponent {
         console.log('Login exitoso:', response);
 
         // Guardar datos en el servicio de autenticación
-        this.authService.setUserData(response.username, response.role_id);
+        this.authService.setUserData(response.username, response.role_id, response.id, response.token);
 
         // Redirigir según el rol del usuario
         this.redirectBasedOnRole(response.role_id);

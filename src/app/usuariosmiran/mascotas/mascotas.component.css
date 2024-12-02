@@ -1,0 +1,64 @@
+.mascotas-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  h2 {
+    color: #4caf50;
+    text-align: center;
+  }
+  
+  .acciones {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .mostrar label,
+  .busqueda label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .nuevo {
+    background-color: #d1c4e9;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .nuevo:hover {
+    background-color: #b39ddb;
+  }
+  
+  .tabla-mascotas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .tabla-mascotas th,
+  .tabla-mascotas td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .tabla-mascotas th {
+    background-color: #e0e0e0;
+  }
+  
+  .foto-mascota {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  

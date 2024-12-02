@@ -3,23 +3,66 @@
     <img src="/img/gato.png" alt="Logo" class="logo" />
     <nav>
       <ul>
+        <!-- Opciones comunes para todos -->
         <li>
           <a routerLink="/" routerLinkActive="active">
             <img src="/img/inicio.png" alt="Inicio" class="icon" />Inicio
           </a>
         </li>
-        <li>
+        <li class="dropdown" 
+            (mouseenter)="showDropdown = true" 
+            (mouseleave)="showDropdown = false">
           <a routerLink="/mascotas" routerLinkActive="active">
             <img src="/img/mascotas.png" alt="Mascotas" class="icon" />Mascotas
           </a>
+          <ul class="dropdown-menu" *ngIf="showDropdown">
+            <li>
+              <a routerLink="/registrar-mascota" routerLinkActive="active">Registrar Mascota</a>
+            </li>
+          </ul>
         </li>
         <li>
           <a routerLink="/citas" routerLinkActive="active">
             <img src="/img/citas.png" alt="Citas" class="icon" />Citas
           </a>
         </li>
+
+        <!-- Opciones solo para Worker y Admin -->
+        <ng-container *ngIf="role === 'Worker' || role === 'Admin'">
+          <li class="dropdown" 
+              (mouseenter)="ventasDropdown = true" 
+              (mouseleave)="ventasDropdown = false">
+            <a routerLink="/ventas" routerLinkActive="active">
+              <img src="/img/ventas.png" alt="Ventas" class="icon" />Ventas
+            </a>
+            <ul class="dropdown-menu" *ngIf="ventasDropdown">
+              <li>
+                <a routerLink="/consultar-venta" routerLinkActive="active">Consultar</a>
+              </li>
+              <li>
+                <a routerLink="/ventas-inventario" routerLinkActive="active">Inventario</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown" 
+              (mouseenter)="usuariosDropdown = true" 
+              (mouseleave)="usuariosDropdown = false">
+            <a routerLink="/usuarios" routerLinkActive="active">
+              <img src="/img/usuarios.png" alt="Usuarios" class="icon" />Usuarios
+            </a>
+            <ul class="dropdown-menu" *ngIf="usuariosDropdown">
+              <li>
+                <a routerLink="/registrar-usuario" routerLinkActive="active">Registrar Usuario</a>
+              </li>
+              <li>
+                <a routerLink="/usuarios-activos" routerLinkActive="active">Usuarios Activos</a>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
       </ul>
     </nav>
+
     <div class="auth-buttons">
       <ng-container *ngIf="username; else guestLinks">
         <span>Bienvenido, {{ username }}</span>
