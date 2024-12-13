@@ -1,68 +1,118 @@
-<div class="mascota-detalles-container">
-  <div class="header">
-    <button class="btn-volver" (click)="volver()">Regresar</button>
+<div class="container">
+  
+  <button (click)="volver()">Volver</button>
+
+  <h2>Consultar Mascota</h2>
+  <form (ngSubmit)="actualizarMascota()">
+    <div>
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" [(ngModel)]="mascota.nombre" name="nombre" required />
+    </div>
+    <div>
+      <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+      <input type="date" id="fecha_nacimiento" [(ngModel)]="mascota.fecha_nacimiento" name="fecha_nacimiento" required (blur)="calcularEdad()" />
+    </div>
+    <div>
+      <label for="raza">Raza</label>
+      <input type="text" id="raza" [(ngModel)]="mascota.raza" name="raza" required />
+    </div>
+    <div>
+      <label for="especie">Especie</label>
+      <input type="text" id="especie" [(ngModel)]="mascota.especie" name="especie" required />
+    </div>
+    <div>
+      <label for="sexo">Sexo</label>
+      <input type="text" id="sexo" [(ngModel)]="mascota.sexo" name="sexo" required />
+    </div>
+    <div>
+      <label for="peso">Peso</label>
+      <input type="number" id="peso" [(ngModel)]="mascota.peso" name="peso" required />
+    </div>
+    <div>
+      <label for="estado">Estado</label>
+      <input type="text" id="estado" [(ngModel)]="mascota.estado" name="estado" required />
+    </div>
+    <div>
+      <label for="foto">Foto</label>
+      <input type="file" id="foto" (change)="onFileChange($event)" />
+    </div>
+
+    <div *ngIf="mascota.foto">
+      <p>Foto actual / nueva:</p>
+      <img [src]="mascota.foto" alt="Foto de la mascota" width="200" />
+    </div>
+
+    <button type="submit">Actualizar Mascota</button>
+  </form>
+
+  <div class="search-citas">
+    <h3>Buscar Citas</h3>
+    <input type="text" [(ngModel)]="searchQuery" (input)="buscarCitas()" placeholder="Buscar por fecha, hora, motivo, mascota..." />
   </div>
 
-  <div class="mascota-detalles-card">
-    <div class="mascota-detalles">
-      <!-- Imagen -->
-      <div class="imagen-container">
-        <img *ngIf="mascota.foto" [src]="mascota.foto" alt="{{ mascota.nombre }}" class="mascota-foto" />
-        <p *ngIf="!mascota.foto">No hay foto disponible</p>
-      </div>
+  <div class="citas-completadas" *ngIf="citasCompletadas.length > 0">
+    <h3>Citas Completadas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha de Visita</th>
+          <th>Hora</th>
+          <th>Motivo</th>
+          <th>Estado</th>
+          <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cita of citasFiltradas">
+          <td>{{ cita.fecha_visita }}</td>
+          <td>{{ cita.hora_cita }}</td>
+          <td>{{ cita.motivo }}</td>
+          <td>{{ cita.estado }}</td>
+          <td><button (click)="verDetallesCita(cita.id_cita)">Ver Detalles</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-      <!-- Formulario -->
-      <form (ngSubmit)="actualizarMascota()" class="formulario-mascota">
-        <h2>Datos De La Mascota</h2>
+  <div *ngIf="citasCompletadas.length === 0">
+    <p>No hay citas completadas para esta mascota.</p>
+  </div>
 
-        <div class="form-group">
-          <label for="nombre">Nombre:</label>
-          <input id="nombre" [(ngModel)]="mascota.nombre" name="nombre" type="text" class="form-control" />
-        </div>
+  <div *ngIf="detallesCita">
+    <h3>Detalles de la Cita</h3>
 
-        <div class="form-group">
-          <label for="fechaNacimiento">Fecha De Nacimiento:</label>
-          <input
-            id="fechaNacimiento"
-            [(ngModel)]="mascota.fecha_nacimiento"
-            name="fechaNacimiento"
-            type="date"
-            class="form-control"
-            (change)="calcularEdad()"
-          />
-        </div>
+    <!--<p><strong>Fecha de Visita:</strong> {{ detallesCita.fecha_visita }}</p>
+    <p><strong>Hora de Cita:</strong> {{ detallesCita.hora_cita }}</p>
+    <p><strong>Motivo:</strong> {{ detallesCita.motivo }}</p>
+    <p><strong>Estado:</strong> {{ detallesCita.estado }}
 
-        <div class="form-group">
-          <label for="edad">Edad:</label>
-          <input id="edad" [(ngModel)]="mascota.edad" name="edad" type="text" class="form-control" readonly />
-        </div>
-
-        <div class="form-group">
-          <label for="raza">Raza:</label>
-          <input id="raza" [(ngModel)]="mascota.raza" name="raza" type="text" class="form-control" />
-        </div>
-
-        <div class="form-group">
-          <label for="especie">Especie:</label>
-          <input id="especie" [(ngModel)]="mascota.especie" name="especie" type="text" class="form-control" />
-        </div>
-
-        <div class="form-group">
-          <label for="sexo">Sexo:</label>
-          <select id="sexo" [(ngModel)]="mascota.sexo" name="sexo" class="form-control">
-            <option value="Macho">Macho</option>
-            <option value="Hembra">Hembra</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="peso">Peso:</label>
-          <input id="peso" [(ngModel)]="mascota.peso" name="peso" type="number" step="0.01" class="form-control" />
-          <span>Kilogramos</span>
-        </div>
-
-        <button type="submit" class="btn-actualizar">Actualizar</button>
-      </form>
+    <h4>Historial de Consultas</h4></p> -->
+    <table *ngIf="historialConsultas.length > 0">
+      <thead>
+        <tr>
+          <th>Fecha de Visita</th>
+          <th>Peso</th>
+          <th>Temperatura</th>
+          <th>Diagnóstico</th>
+          <th>Tratamiento</th>
+          <th>Síntomas</th>
+          <th>Medicinas Aplicadas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let consulta of historialConsultas">
+          <td>{{ consulta.fecha_visita }}</td>
+          <td>{{ consulta.peso }}</td>
+          <td>{{ consulta.temperatura }}</td>
+          <td>{{ consulta.diagnostico }}</td>
+          <td>{{ consulta.tratamiento }}</td>
+          <td>{{ consulta.sintomas }}</td>
+          <td>{{ consulta.medicinas_aplicadas }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="historialConsultas.length === 0">
+      <p>No hay consultas relacionadas con esta cita.</p>
     </div>
   </div>
 </div>

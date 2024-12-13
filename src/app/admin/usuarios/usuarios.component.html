@@ -1,1 +1,44 @@
-<p>usuarios works!</p>
+<div class="container">
+  <h2>Lista de Usuarios</h2>
+
+  <!-- Campo de búsqueda -->
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" (input)="filterUsuarios()" placeholder="Buscar por nombre o correo" class="search-input">
+  </div>
+
+  <!-- Mensaje de carga -->
+  <div *ngIf="loading">Cargando usuarios...</div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Tabla de usuarios -->
+  <table *ngIf="!loading && !errorMessage" class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo Electrónico</th>
+        <th>Teléfono</th>
+        <th>Estado</th>
+        <th>Rol</th>
+        <th>Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of filteredUsuarios">
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.first_name }} {{ usuario.last_name }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.phone }}</td>
+        <td>{{ usuario.estado }}</td>
+        <td>{{ usuario.role_id }}</td>
+        <td>
+          <button (click)="consultarUsuario(usuario.id)" class="btn btn-primary">Consultar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

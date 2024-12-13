@@ -1,0 +1,202 @@
+/* Estilos generales */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor del formulario */
+form {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 700px;
+  transition: transform 0.3s ease;
+}
+
+/* Títulos */
+h2, h3 {
+  color: #6a2c9c; /* Color morado */
+  font-size: 2em;
+  margin-bottom: 25px;
+  text-align: center; /* Centrado del texto */
+  letter-spacing: 1px;
+}
+
+/* Etiquetas */
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 1.1em;
+}
+
+/* Campos de formulario */
+input[type="text"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0 24px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1.1em;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: #6a2c9c;
+  box-shadow: 0 0 5px rgba(106, 44, 156, 0.4);
+  outline: none;
+}
+
+/* Botón de submit */
+button[type="submit"] {
+  background-color: #6a2c9c; /* Morado */
+  color: #fff;
+  padding: 14px 22px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #5b2387; /* Morado más oscuro */
+  transform: scale(1.05); /* Agrega un pequeño efecto al pasar el mouse */
+}
+
+/* Mensajes de confirmación o error */
+.success-message, .error-message {
+  padding: 12px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Tabla de citas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
+  border: 1px solid #ddd; /* Borde para la tabla */
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.1em;
+  word-wrap: break-word; /* Asegura que las palabras largas se dividan */
+}
+
+table th {
+  background-color: #6a2c9c;
+  color: #fff;
+  font-size: 1.1em;
+}
+
+table tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+/* Botones en la tabla */
+button.btn {
+  background-color: #6a2c9c;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+  background-color: #5b2387;
+}
+
+/* Estilo para la tabla sin citas */
+p {
+  text-align: center;
+  color: #777;
+  font-size: 1.2em;
+}
+
+/* Estilos para el contenedor de citas y formulario */
+.form-container {
+  margin: 40px auto;
+  max-width: 750px;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Asegura que los elementos internos no se desborden */
+}
+
+/* Estilos para el contenedor de citas sin citas registradas */
+.no-citas {
+  text-align: center;
+  padding: 25px;
+  font-size: 1.3em;
+  color: #777;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Select deshabilitado */
+select[disabled] {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+/* Diseño responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  form {
+    padding: 18px;
+    margin: 15px;
+  }
+
+  h2, h3 {
+    font-size: 1.7em;
+  }
+
+  button[type="submit"] {
+    width: auto; /* El botón no ocupa todo el ancho en pantallas pequeñas */
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table th, table td {
+    padding: 10px;
+    font-size: 1em; /* Ajusta el tamaño de la fuente en pantallas pequeñas */
+    white-space: normal; /* Permite que el texto se ajuste */
+  }
+}

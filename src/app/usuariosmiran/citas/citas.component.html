@@ -1,1 +1,172 @@
-<p>citas works!</p>
+<!-- Vista para Clientes -->
+<div *ngIf="role === '3'">
+
+
+  <!-- Mensaje de confirmación -->
+  <div *ngIf="submitted && !errorMessage" class="success-message">
+    <p>¡Cita solicitada con éxito! Te notificaremos cuando esté confirmada.</p>
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+ 
+  <div class="form-container">
+    <h2>Solicitar Cita</h2>
+    <form (ngSubmit)="createCita()">
+       
+      <!-- Selección de Mascota -->
+      <div>
+        <label for="mascota">Seleccionar mascota:</label>
+        <select id="mascota" [(ngModel)]="selectedMascota" name="mascota" required aria-label="Seleccione una mascota">
+          <option *ngFor="let mascota of mascotas" [value]="mascota.id">{{ mascota.nombre }}</option>
+        </select>
+      </div>
+
+      <!-- Fecha -->
+      <div>
+        <label for="fecha">Fecha:</label>
+        <input type="date" [(ngModel)]="selectedFecha" name="fecha" required id="fecha" min="{{minDate}}" aria-label="Seleccionar fecha" (change)="updateAvailableHours()" />
+      </div>
+
+      <!-- Hora -->
+      <div>
+        <label for="hora">Hora:</label>
+        <select [(ngModel)]="selectedHora" name="hora" required id="hora" aria-label="Seleccionar hora">
+          <option *ngFor="let hora of availableHours" [value]="hora">{{ hora }}</option>
+        </select>
+      </div>
+
+      <!-- Motivo -->
+      <div>
+        <label for="motivo">Motivo:</label>
+        <input type="text" [(ngModel)]="motivo" name="motivo" required id="motivo" aria-label="Especificar motivo" />
+      </div>
+
+      <button type="submit">Solicitar cita</button>
+    </form>
+
+    <h3>Mis Citas</h3>
+    <div *ngIf="citas.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Motivo</th>
+            <th>Detalles</th> <!-- Columna de detalles -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of citas">
+            <td>{{ cita.fecha_visita }}</td>
+            <td>{{ cita.hora_cita }}</td>
+            <td>{{ cita.motivo }}</td>
+            <!-- Enlace a consultar detalles de la cita -->
+            <td>
+              <button (click)="consultarCita(cita.id_cita)" class="btn btn-primary">Consultar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="citas.length === 0">
+      <p>No tienes citas registradas.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Vista para Admins y Workers -->
+<div *ngIf="role === '1' || role === '2'">
+
+  <!-- Mensaje de confirmación -->
+  <div *ngIf="submitted && !errorMessage" class="success-message">
+    <p>¡Cita registrada con éxito para el usuario!</p>
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div class="form-container">
+    <h3>Solicitar Cita</h3>
+    <form (ngSubmit)="createCita()">
+      <!-- Selección de Usuario -->
+      <div>
+        <label for="usuario">Seleccionar Usuario:</label>
+        <select id="usuario" [(ngModel)]="selectedUsuario" name="usuario" required aria-label="Seleccionar un usuario" (change)="loadMascotas()">
+          <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.first_name }} {{ usuario.last_name }}</option>
+        </select>
+      </div>
+
+      <!-- Selección de Mascota -->
+      <div>
+        <label for="mascota">Seleccionar mascota:</label>
+        <select id="mascota" [(ngModel)]="selectedMascota" name="mascota" required aria-label="Seleccionar mascota">
+          <option *ngFor="let mascota of mascotas" [value]="mascota.id">{{ mascota.nombre }}</option>
+        </select>
+        <div *ngIf="mascotas.length === 0">
+          <p>No hay mascotas disponibles para este usuario.</p>
+        </div>
+      </div>
+
+      <!-- Fecha de la cita -->
+      <div>
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" [(ngModel)]="selectedFecha" name="fecha" required aria-label="Seleccionar fecha" min="{{minDate}}" (change)="updateAvailableHours()" />
+      </div>
+
+      <!-- Hora de la cita -->
+      <div>
+        <label for="hora">Hora:</label>
+        <select id="hora" [(ngModel)]="selectedHora" name="hora" required aria-label="Seleccionar hora">
+          <option *ngFor="let hora of availableHours" [value]="hora">{{ hora }}</option>
+        </select>
+      </div>
+
+      <!-- Motivo de la cita -->
+      <div>
+        <label for="motivo">Motivo:</label>
+        <input type="text" id="motivo" [(ngModel)]="motivo" name="motivo" required aria-label="Especificar motivo" />
+      </div>
+
+      <button type="submit">Solicitar Cita</button>
+    </form>
+
+    <h3>Citas</h3>
+    <div *ngIf="citas.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Mascota</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Motivo</th>
+            <th>Detalles</th> <!-- Columna de detalles -->
+            <th>Cancelar Cita</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of citas">
+            <td>{{ cita.usuario_nombre }} {{ cita.usuario_apellido }}</td>
+            <td>{{ cita.mascota_nombre }}</td>
+            <td>{{ cita.fecha_visita }}</td>
+            <td>{{ cita.hora_cita }}</td>
+            <td>{{ cita.motivo }}</td>
+
+            <!-- Enlace a consultar detalles de la cita -->
+            <td>
+              <button (click)="consultarCita(cita.id_cita)" class="btn btn-primary">Consultar</button>
+            </td>
+
+            <td>
+              <button (click)="EliminarCita(cita.id_cita)" class="btn btn-primary">Eliminar Cita</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="citas.length === 0">
+      <p>No hay citas registradas.</p>
+    </div>
+  </div>
+</div>

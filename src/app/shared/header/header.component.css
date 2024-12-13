@@ -1,5 +1,5 @@
-/* Estilos del Header */
-header {
+ /* Estilos del Header */
+ header {
   background-color: #28a745;
   padding: 15px 20px;
   display: flex;
@@ -54,9 +54,18 @@ nav ul li a:hover {
   margin-right: 5px;
 }
 
+/* Estilo de los botones de autenticación */
 .auth-buttons {
   display: flex;
   gap: 15px;
+  align-items: center;
+}
+
+.auth-buttons span {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  margin-right: 10px;  /* Espacio entre el texto y el botón */
 }
 
 button {
@@ -69,6 +78,7 @@ button {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  min-width: 120px;  /* Asegura que el botón tenga un ancho mínimo */
 }
 
 button:hover {

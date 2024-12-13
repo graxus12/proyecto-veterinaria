@@ -34,6 +34,11 @@ export class AuthService {
     localStorage.setItem('token', token);  // Guardamos el token en localStorage
   }
 
+  // Método para obtener los datos del usuario
+  getUserData(): { username: string | null; role: string | null; id: string | null; token: string | null } {
+    return this.userData.getValue();  // Devuelve el valor actual del BehaviorSubject
+  }
+
   // Método para eliminar los datos del usuario y el token
   logout(): void {
     localStorage.removeItem('username');

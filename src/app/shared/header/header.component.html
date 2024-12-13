@@ -3,7 +3,7 @@
     <img src="/img/gato.png" alt="Logo" class="logo" />
     <nav>
       <ul>
-        <!-- Opciones comunes para todos -->
+        <!-- el pinche chochua lo mira -->
         <li>
           <a routerLink="/" routerLinkActive="active">
             <img src="/img/inicio.png" alt="Inicio" class="icon" />Inicio
@@ -27,7 +27,7 @@
           </a>
         </li>
 
-        <!-- Opciones solo para Worker y Admin -->
+        <!-- Opciones  admin trabajador -->
         <ng-container *ngIf="role === 'Worker' || role === 'Admin'">
           <li class="dropdown" 
               (mouseenter)="ventasDropdown = true" 

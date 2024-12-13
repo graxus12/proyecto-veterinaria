@@ -1,11 +1,146 @@
-.main-content {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .location-img {
-    max-width: 80%;
-    height: auto;
-    margin-top: 20px;
-  }
-  
+/* Contenedor principal de contenido */
+.main-content-container {
+  padding: 2rem;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* Título principal */
+.main-content h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Sección de ubicación */
+.location {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.location p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Mapa interactivo */
+.location-map iframe {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* Sección de testimonios */
+.testimonials {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.testimonials h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.testimonials p {
+  font-size: 1rem;
+  color: #555;
+  font-style: italic;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Sección de redes sociales */
+.social-links {
+  margin-bottom: 2rem;
+}
+
+.social-links h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #555;
+}
+
+.social-icons img.icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 0.5rem;
+}
+
+/* Estilo para la galería */
+.gallery {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.gallery h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.gallery-images {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.gallery-images img {
+  width: 32%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carousel-controls button {
+  padding: 0.5rem 1rem;
+  background-color: #6a4caf;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.carousel-controls button:hover {
+  background-color: #57379b;
+}

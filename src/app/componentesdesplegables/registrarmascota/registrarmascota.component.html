@@ -1,1 +1,64 @@
-<p>registrarmascota works!</p>
+<div class="registrar-mascota-container">
+    <h2>Registrar Mascota</h2>
+  
+    <form (ngSubmit)="registrarMascota()" enctype="multipart/form-data">
+        <!-- Nombre -->
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" [(ngModel)]="mascota.nombre" name="nombre" required />
+        </div>
+  
+        <!-- Fecha de nacimiento -->
+        <div class="form-group">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <input id="fechaNacimiento" type="date" [(ngModel)]="mascota.fechaNacimiento" name="fechaNacimiento" />
+        </div>
+  
+        <!-- Raza -->
+        <div class="form-group">
+            <label for="raza">Raza</label>
+            <input id="raza" type="text" [(ngModel)]="mascota.raza" name="raza" />
+        </div>
+  
+        <!-- Especie -->
+        <div class="form-group">
+            <label for="especie">Especie</label>
+            <input id="especie" type="text" [(ngModel)]="mascota.especie" name="especie" />
+        </div>
+  
+        <!-- Sexo -->
+        <div class="form-group">
+            <label for="sexo">Sexo</label>
+            <select id="sexo" [(ngModel)]="mascota.sexo" name="sexo" required>
+                <option value="">Seleccione</option>
+                <option value="macho">Macho</option>
+                <option value="hembra">Hembra</option>
+            </select>
+        </div>
+  
+        <!-- Peso -->
+        <div class="form-group">
+            <label for="peso">Peso (kg)</label>
+            <input id="peso" type="number" [(ngModel)]="mascota.peso" name="peso" min="0" step="0.1" />
+        </div>
+  
+        <!-- Seleccionar Propietario (Solo para Admin) -->
+        <div class="form-group" *ngIf="role === 1">
+            <label for="ownerId">Propietario</label>
+            <select id="ownerId" [(ngModel)]="mascota.ownerId" name="ownerId" required>
+                <option value="">Seleccione un propietario</option>
+                <option *ngFor="let usuario of usuarios" [value]="usuario.id">
+                    {{ usuario.First_Name }} {{ usuario.Last_Name }}
+                </option>
+            </select>
+        </div>
+  
+        <!-- Foto -->
+        <div class="form-group">
+            <label for="foto">Foto</label>
+            <input id="foto" type="file" (change)="onFileSelected($event)" name="foto" />
+        </div>
+
+        <button type="submit">Registrar</button>
+    </form>
+</div>

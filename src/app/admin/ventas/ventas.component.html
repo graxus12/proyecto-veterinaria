@@ -1,1 +1,85 @@
-<p>ventas works!</p>
+<div class="ventas-container">
+  <!-- Contenedor para escanear el código de barras -->
+  <div class="scan-container">
+    <label for="codigoBarras">Escanear o ingresar código de barras:</label>
+    <input
+      id="codigoBarras"
+      type="text"
+      [(ngModel)]="codigoBarras"
+      (input)="buscarProducto()"
+      placeholder="Escanear o ingresar código de barras"
+      class="scan-input"
+      aria-label="Código de barras del producto"
+    />
+    <button (click)="mostrarFormularioServicio = !mostrarFormularioServicio">Agregar servicio manual</button>
+  </div>
+
+  <!-- Formulario para agregar servicio manual -->
+  <div *ngIf="mostrarFormularioServicio" class="form-container">
+    <label for="nombreServicio">Nombre del Servicio:</label>
+    <input type="text" [(ngModel)]="nombreServicio" placeholder="Nombre del servicio" />
+    
+    <label for="precioServicio">Precio del Servicio:</label>
+    <input type="number" [(ngModel)]="precioServicio" placeholder="Precio del servicio" min="0" />
+
+    <button (click)="agregarServicio()">Agregar Servicio</button>
+  </div>
+
+  <!-- Tabla de productos y servicios -->
+  <div class="table-container">
+    <table class="venta-table">
+      <thead>
+        <tr>
+          <th>Producto/Servicio</th>
+          <th>Código de Barras</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Total</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of productosVenta">
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.codigo_barras || 'N/A' }}</td>
+          <td>
+            <label for="cantidad{{item.codigo_barras}}">Cantidad:</label>
+            <input
+              id="cantidad{{item.codigo_barras}}"
+              type="number"
+              [(ngModel)]="item.cantidad"
+              min="1"
+              (change)="calcularTotalVenta()"
+              [attr.aria-label]="'Cantidad de ' + item.nombre"
+            />
+          </td>
+          <td>{{ item.precio | currency }}</td>
+          <td>{{ item.total | currency }}</td>
+          <td><button (click)="eliminarProducto(item)" [attr.aria-label]="'Eliminar ' + item.nombre">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Resumen de la venta -->
+  <div class="venta-summary">
+    <p>Total: {{ totalVenta | currency }}</p>
+    
+    <!-- Campo para ingresar el monto con el que paga -->
+    <label for="montoPago">Monto con el que paga:</label>
+    <input
+      id="montoPago"
+      type="number"
+      [(ngModel)]="montoPago"
+      min="0"
+      placeholder="Ingresa el monto con el que pagas"
+      (ngModelChange)="calcularCambio()"
+      aria-label="Monto con el que paga el usuario"
+    />
+    
+    <!-- Mostrar el cambio en tiempo real -->
+    <p *ngIf="montoPago >= totalVenta">Cambio: {{ cambio | currency }}</p>
+    
+    <button (click)="confirmarPago()" aria-label="Registrar venta">Registrar Venta</button>
+  </div>
+</div>

@@ -1,64 +1,171 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Contenedor principal */
 .mascotas-container {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-  }
-  
-  h2 {
-    color: #4caf50;
-    text-align: center;
-  }
-  
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más suave */
+  font-family: 'Arial', sans-serif;
+  border: 1px solid #ddd; /* Borde suave alrededor del contenedor */
+}
+
+/* Título */
+.mascotas-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Estilo de las acciones (mostrar/filtrar) */
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.mostrar, .busqueda {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mostrar label, .busqueda label {
+  font-weight: 600;
+  color: #555;
+}
+
+.mostrar input, .busqueda input {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mostrar input:focus, .busqueda input:focus {
+  border-color: #8a2be2;
+  box-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+}
+
+/* Botón para agregar nueva mascota */
+.nuevo {
+  background-color: #8a2be2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nuevo:hover {
+  background-color: #7a1fa2;
+  transform: scale(1.05); /* Efecto de escala */
+}
+
+/* Estilo para la tabla de mascotas */
+.tabla-mascotas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra alrededor de la tabla */
+}
+
+.tabla-mascotas th, .tabla-mascotas td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+  color: #333;
+  font-size: 14px;
+}
+
+.tabla-mascotas th {
+  background-color: #8a2be2;
+  color: white;
+  font-weight: bold;
+  text-transform: none; /* Quita la transformación a mayúsculas */
+}
+
+.tabla-mascotas tr:nth-child(even) {
+  background-color: #fff; /* Elimina el color verde claro */
+}
+
+.tabla-mascotas tr:hover {
+  background-color: #e1bee7; /* Morado más oscuro */
+  transition: background-color 0.3s ease;
+}
+
+/* Imagen de la mascota */
+.foto-mascota {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+/* Enlaces en la tabla */
+td a {
+  color: #8a2be2;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+td a:hover {
+  text-decoration: underline;
+  color: #7a1fa2; /* Cambio de color al pasar el ratón */
+}
+
+/* Mensaje cuando no hay mascotas */
+ng-template p {
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
   .acciones {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .mostrar label,
-  .busqueda label {
-    margin-right: 10px;
-    font-weight: bold;
-  }
-  
+
   .nuevo {
-    background-color: #d1c4e9;
-    border: none;
-    padding: 10px 20px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .nuevo:hover {
-    background-color: #b39ddb;
-  }
-  
-  .tabla-mascotas {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 10px;
   }
-  
-  .tabla-mascotas th,
-  .tabla-mascotas td {
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ddd;
+
+  .tabla-mascotas th, .tabla-mascotas td {
+    font-size: 12px;
+    padding: 8px;
   }
-  
-  .tabla-mascotas th {
-    background-color: #e0e0e0;
-  }
-  
+
   .foto-mascota {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
   }
-  
+}

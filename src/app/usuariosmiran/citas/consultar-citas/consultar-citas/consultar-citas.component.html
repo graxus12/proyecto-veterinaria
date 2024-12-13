@@ -1,0 +1,98 @@
+<div *ngIf="cita">
+  <h2>Detalles de la Cita</h2>
+
+  <!-- Vista de los detalles de la cita -->
+  <div *ngIf="!editMode; else editTemplate">
+    <p><strong>ID de Cita:</strong> {{ cita.id_cita }}</p>
+    <p><strong>Fecha de Visita:</strong> {{ cita.fecha_visita }}</p>
+    <p><strong>Hora de Cita:</strong> {{ cita.hora_cita }}</p>
+    <p><strong>Motivo:</strong> {{ cita.motivo }}</p>
+    <div *ngIf="role !== 'Client'">
+      <p><strong>Estado:</strong> {{ cita.estado }}</p>
+    </div>
+    
+    <h3>Detalles de la Mascota</h3>
+    <p><strong>Nombre de la Mascota:</strong> {{ cita.mascota_nombre }}</p>
+
+    <h3>Historial de Consultas</h3>
+    <p><strong>ID de Consulta:</strong> {{ cita.id_consulta }}</p>
+    <p><strong>Fecha de Consulta:</strong> {{ cita.fecha_consulta }}</p>
+    <p><strong>Motivo de Consulta:</strong> {{ cita.motivo_consulta }}</p>
+    <p><strong>Peso:</strong> {{ cita.peso }}</p>
+    <p><strong>Temperatura:</strong> {{ cita.temperatura }}</p>
+    <p><strong>Diagnóstico:</strong> {{ cita.diagnostico }}</p>
+    <p><strong>Tratamiento:</strong> {{ cita.tratamiento }}</p>
+    <p><strong>Síntomas:</strong> {{ cita.sintomas }}</p>
+    <p><strong>Medicinas Aplicadas:</strong> {{ cita.medicinas_aplicadas }}</p>
+ 
+    <button (click)="enableEditMode()">Editar</button>
+   
+  </div>
+
+  <!-- Vista para editar los detalles de la cita -->
+  <ng-template #editTemplate>
+
+    <!-- Fecha -->
+    <div>
+      <label for="fecha">Fecha:</label>
+      <input type="date" [(ngModel)]="fechaSeleccionada" name="fecha" required id="fecha" (change)="updateAvailableHours()"/>
+    </div>
+
+    <!-- Hora -->
+    <div>
+      <label for="hora">Hora:</label>
+      <select [(ngModel)]="horaSeleccionada" name="hora" required id="hora" aria-label="Seleccionar hora">
+        <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora }}</option>
+      </select>
+    </div>
+
+    <label for="motivo">Motivo:</label>
+    <input id="motivo" [(ngModel)]="cita.motivo" type="text" placeholder="Motivo de la cita" />
+
+    <label for="estado">Estado:</label>
+    <select id="estado" [(ngModel)]="cita.estado" title="Seleccione el estado de la cita">
+      <option value="pendiente">Pendiente</option>
+      <option value="completada">Completada</option>
+      <option value="cancelada">Cancelada</option>
+    </select>
+
+    <h3>Detalles de la Mascota</h3>
+    <p><strong>Nombre de la Mascota:</strong> {{ cita.mascota_nombre }}</p>
+
+    <h3>Historial de Consultas</h3>
+    <!-- Solo muestra y permite editar el historial si el rol no es "Client" -->
+    <div *ngIf="role !== 'Client'">
+      <label for="fecha-consulta">Fecha de Consulta:</label>
+      <input id="fecha-consulta" [(ngModel)]="cita.fecha_consulta" type="date" />
+
+      <label for="motivo-consulta">Motivo de Consulta:</label>
+      <input id="motivo-consulta" [(ngModel)]="cita.motivo_consulta" type="text" placeholder="Motivo de consulta" />
+
+      <label for="peso">Peso:</label>
+      <input id="peso" [(ngModel)]="cita.peso" type="number" step="0.01" placeholder="Peso en kg" />
+
+      <label for="temperatura">Temperatura:</label>
+      <input id="temperatura" [(ngModel)]="cita.temperatura" type="number" step="0.01" placeholder="Temperatura en °C" />
+
+      <label for="diagnostico">Diagnóstico:</label>
+      <textarea id="diagnostico" [(ngModel)]="cita.diagnostico" placeholder="Escriba el diagnóstico"></textarea>
+
+      <label for="tratamiento">Tratamiento:</label>
+      <textarea id="tratamiento" [(ngModel)]="cita.tratamiento" placeholder="Escriba el tratamiento"></textarea>
+
+      <label for="sintomas">Síntomas:</label>
+      <textarea id="sintomas" [(ngModel)]="cita.sintomas" placeholder="Describa los síntomas"></textarea>
+
+      <label for="medicinas-aplicadas">Medicinas Aplicadas:</label>
+      <textarea id="medicinas-aplicadas" [(ngModel)]="cita.medicinas_aplicadas" placeholder="Escriba las medicinas aplicadas"></textarea>
+
+    </div>
+
+    <button (click)="saveChanges()">Guardar</button>
+    <button (click)="cancelEditMode()">Cancelar</button>
+  </ng-template>
+</div>
+
+<div *ngIf="!cita">
+  <p>No se encontraron detalles para esta cita.</p>
+</div>

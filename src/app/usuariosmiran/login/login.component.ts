@@ -19,14 +19,17 @@ export class LoginComponent {
 
   onSubmit() {
     const loginData = { email: this.email, password: this.password };
-
+  
     this.http.post('http://localhost/api/login.php', loginData).subscribe(
       (response: any) => {
-        console.log('Login exitoso:', response);
-
-        // Guardar datos en el servicio de autenticación
+        console.log('Login exitoso:', response); // Verifica que el response contiene el token
+  
+        // Guardar el token en el localStorage
+        localStorage.setItem('token', response.token);
+  
+        // Guardar los datos del usuario en el servicio de autenticación
         this.authService.setUserData(response.username, response.role_id, response.id, response.token);
-
+  
         // Redirigir según el rol del usuario
         this.redirectBasedOnRole(response.role_id);
       },
@@ -36,13 +39,17 @@ export class LoginComponent {
       }
     );
   }
+  
 
   private redirectBasedOnRole(role_id: string) {
     if (role_id === '1') {
+      // Redirigir al administrador
       this.router.navigate(['/admin']);
     } else if (role_id === '2') {
+      // Redirigir al trabajador
       this.router.navigate(['/worker']);
     } else if (role_id === '3') {
+      // Redirigir al cliente
       this.router.navigate(['/client']);
     }
   }

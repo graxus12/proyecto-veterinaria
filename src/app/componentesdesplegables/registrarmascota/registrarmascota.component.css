@@ -1,0 +1,89 @@
+/* Estilos generales para el contenedor de registrar mascota */
+.registrar-mascota-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    font-family: 'Arial', sans-serif;
+    border: 1px solid #ddd;
+  }
+  
+  .registrar-mascota-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 26px;
+    font-weight: bold;
+  }
+  
+  /* Estilos del formulario */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Estilo de los campos de entrada */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    color: #555;
+    font-size: 16px;
+  }
+  
+  .form-group input, .form-group select {
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input:focus, .form-group select:focus {
+    border-color: #8a2be2;
+    box-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+  }
+  
+  /* Estilo para los botones */
+  button[type="submit"] {
+    background-color: #8a2be2;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: center;
+    width: auto;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #7a1fa2;
+    transform: scale(1.05);
+  }
+  
+  /* Estilo para el campo de la foto */
+  .form-group input[type="file"] {
+    font-size: 14px;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .registrar-mascota-container {
+      padding: 15px;
+    }
+  
+    .form-group input, .form-group select, button[type="submit"] {
+      width: 100%;
+    }
+  }
+  

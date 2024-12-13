@@ -28,7 +28,11 @@
     <tbody>
       <tr *ngFor="let mascota of mascotasFiltradas | slice:0:cantidadAMostrar">
         <td>
-          <img [src]="mascota.foto || 'ruta/imagen/default.jpg'" alt="{{ mascota.nombre }}" class="foto-mascota" />
+          <!-- Mostrar la imagen de la mascota -->
+          <img *ngIf="mascota.foto" [src]="'http://localhost/api/' + mascota.foto" alt="{{ mascota.nombre }}" class="foto-mascota" />
+
+
+          <p *ngIf="!mascota.foto">No hay foto disponible</p>
         </td>
         <td>{{ mascota.nombre }}</td>
         <td>{{ mascota.raza }}</td>

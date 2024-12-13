@@ -1,0 +1,9 @@
+/* Estilos globales para el contenedor del contenido */
+router-outlet {
+    display: block;
+    margin-top: 95x; /* Ajusta este valor según la altura de tu header */
+    padding: 15px;
+  }
+  
+  /* Si necesitas asegurarte de que el contenido no se superponga al header, también puedes agregar padding adicional */
+  

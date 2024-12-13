@@ -1,0 +1,103 @@
+/* Estilo para el contenedor principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 80px; /* Ajusta este valor según la altura de tu header */
+  }
+  
+  /* Estilos para el título */
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para el mensaje de carga */
+  div[ngIf="loading"] {
+    font-size: 18px;
+    color: #6c757d;
+  }
+  
+  /* Estilo para el mensaje de error */
+  .error-message {
+    color: #e74c3c;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para la tabla */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+  }
+  
+  .table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #f4f4f4;
+  }
+  
+  .table td {
+    color: #555;
+  }
+  
+  /* Estilos para el botón de consulta */
+  .table button {
+    background-color: #6a2c9c;
+
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .table button:hover {
+    background-color: #5c248a;
+
+  }
+
+  /* Estilos para el contenedor de búsqueda */
+.search-container {
+    margin-bottom: 20px; /* Espacio debajo del buscador */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  /* Estilos para el input del buscador */
+  .search-input {
+    width: 250px; /* Ancho del input, puedes ajustarlo según el diseño */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Estilo para el foco del input */
+  .search-input:focus {
+    border-color: #6a2c9c;
+  }
+  
+  /* Estilos para el texto dentro del input */
+  .search-input::placeholder {
+    color: #aaa; /* Color del texto de placeholder */
+    font-style: italic;
+  }
+  
+  

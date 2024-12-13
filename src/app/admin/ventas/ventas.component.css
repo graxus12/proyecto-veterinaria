@@ -1,0 +1,147 @@
+/* Contenedor principal para ventas */
+.ventas-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  /* Estilo para los campos de entrada */
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus {
+    border-color: #4caf50;
+    outline: none;
+  }
+  
+  button {
+    background-color: #6a2c9c;
+
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #562281;
+
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Contenedor para el formulario de servicio manual */
+  .form-container {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .form-container input {
+    margin-bottom: 15px;
+  }
+  
+  .form-container button {
+    width: 100%;
+  }
+  
+  /* Contenedor para la tabla de productos y servicios */
+  .table-container {
+    margin-top: 20px;
+  }
+  
+  .venta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .venta-table th,
+  .venta-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .venta-table th {
+    background-color: #f1f1f1;
+  }
+  
+  .venta-table tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .venta-table td input {
+    width: 60px;
+    text-align: center;
+  }
+  
+  .venta-table td button {
+    background-color: #e74c3c;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .venta-table td button:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Estilo para el resumen de la venta */
+  .venta-summary {
+    background-color: #ffffff;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .venta-summary p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .venta-summary label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  
+  .venta-summary input {
+    margin-bottom: 15px;
+  }
+  
+  .venta-summary button {
+    width: 100%;
+    background-color: #6a2c9c;
+    ;
+  }
+  
+  .venta-summary button:hover {
+    background-color: #572283;
+
+  }
+  

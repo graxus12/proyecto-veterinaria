@@ -1,1 +1,66 @@
-<p>consultarventa works!</p>
+<div class="consultar-ventas">
+  <h2>Consultar Ventas</h2>
+
+  <!-- Filtros de fecha -->
+  <form (ngSubmit)="aplicarFiltros()">
+    <div>
+      <label for="fecha_inicio">Fecha de Inicio:</label>
+      <input type="date" id="fecha_inicio" [(ngModel)]="filtros.fecha_inicio" name="fecha_inicio" />
+    </div>
+    
+    <div>
+      <label for="fecha_fin">Fecha de Fin:</label>
+      <input type="date" id="fecha_fin" [(ngModel)]="filtros.fecha_fin" name="fecha_fin" />
+    </div>
+
+    <button type="submit">Aplicar Filtros</button>
+  </form>
+
+  <!-- Lista de ventas -->
+  <table *ngIf="ventas.length > 0">
+    <thead>
+      <tr>
+        <th>ID Venta</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let venta of ventas">
+        <td>{{ venta.id_venta }}</td>
+        <td>{{ venta.fecha_venta | date: 'short' }}</td>
+        <td>{{ venta.total | currency }}</td>
+        <td>
+          <button (click)="verDetalles(venta.id_venta)">Ver Detalles</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Detalles de la venta seleccionada -->
+  <div *ngIf="detallesVisible && ventaDetalles.id_venta === ventaSeleccionada">
+    <h3>Detalles de la Venta</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Código de Barras</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio Unitario</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detalle of ventaDetalles.productos">
+          <td>{{ detalle.codigo_barras }}</td>
+          <td>{{ detalle.nombre }}</td>
+          <td>{{ detalle.cantidad }}</td>
+          <td>{{ detalle.precio | currency }}</td>
+          <td>{{ detalle.total | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="ocultarDetalles()">Ocultar Detalles</button>
+  </div>
+</div>

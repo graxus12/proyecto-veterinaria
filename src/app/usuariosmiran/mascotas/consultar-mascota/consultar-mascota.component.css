@@ -1,90 +1,169 @@
-.mascota-detalles-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Estilos generales */
+body {
     font-family: Arial, sans-serif;
-  }
-  
-  .header {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    padding: 10px;
-  }
-  
-  .btn-volver {
-    background-color: #d8b8f3;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .mascota-detalles-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.9); /* Fondo con transparencia */
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    width: 80%;
-    max-width: 900px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .mascota-detalles {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: flex-start;
-  }
-  
-  .imagen-container {
+}
+
+/* Títulos */
+h2, h3, h4 {
+    color: #333;
+    text-align: center;
+}
+
+/* Estilo de formularios */
+form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  
-  .mascota-foto {
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-  
-  .formulario-mascota {
+    gap: 15px;
+}
+
+form div {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    gap: 10px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
+}
+
+label {
     font-weight: bold;
-  }
-  
-  input {
-    padding: 8px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+input[type="file"],
+input[type="password"],
+textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+input[type="file"] {
+    border: 2px dashed #8a2be2; /* Borde más evidente para el input file */
+    padding: 10px;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #8a2be2; /* Nuevo color de borde al hacer focus */
+    box-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+}
+
+/* Botones */
+button {
+    padding: 10px 15px;
+    background-color: #8a2be2; /* Color azul */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+    background-color: #8a2be2; /* Azul más oscuro */
+    transform: scale(1.05); /* Pequeña animación al pasar el ratón */
+}
+
+/* Tabla de citas y consultas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+thead {
+    background-color: #8a2be2;
+    color: #fff;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Cambiar color según el estado */
+tbody tr[data-estado="Completada"] {
+    background-color: #e6ffe6; /* Verde claro */
+}
+
+tbody tr[data-estado="Pendiente"] {
+    background-color: #fffbe6; /* Amarillo claro */
+}
+
+tbody tr[data-estado="Cancelada"] {
+    background-color: #ffe6e6; /* Rojo claro */
+}
+
+/* El efecto hover solo se aplica a las filas del cuerpo (tbody), no al encabezado (thead) */
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Evitar hover en el encabezado */
+thead tr {
+    background-color: #8a2be2;
+    color: #fff;
+}
+
+/* Imagen de previsualización */
+img {
+    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
-  
-  .btn-actualizar {
-    margin-top: 20px;
-    background-color: #d8b8f3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
+}
+
+/* Buscador */
+.search-citas input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
     border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  span {
     font-size: 14px;
-    color: gray;
-  }
-  
+}
+
+/* Mensajes informativos */
+p {
+    color: #666;
+}
+
+/* Responisvidad */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h2, h3 {
+        font-size: 1.5em;
+    }
+
+    input, button {
+        font-size: 14px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+}

@@ -12,16 +12,21 @@ import { ConsultarventaComponent } from './componentesdesplegables/consultarvent
 import { VentasinventarioComponent } from './componentesdesplegables/ventasinventario/ventasinventario.component';
 import { RegistrarusuarioComponent } from './componentesdesplegables/registrarusuario/registrarusuario.component';
 import { UsuariosactivosComponent } from './componentesdesplegables/usuariosactivos/usuariosactivos.component';
+import { ConsultarCitasComponent } from './usuariosmiran/citas/consultar-citas/consultar-citas/consultar-citas.component';
+
+// Importar el componente `ConsultarUsuarioComponent`
+import { ConsultarUsuarioComponent } from './admin/usuarios/consultar-usuario/consultar-usuario/consultar-usuario.component';
 
 export const routes: Routes = [
-  { path: '', component: MainContentComponent },  // Página principal
-  { path: 'mascotas', component: MascotasComponent },  // Página de mascotas
-  { path: 'consultar-mascota/:id', component: ConsultarMascotaComponent },  // Ruta para consultar detalles de la mascota
-  { path: 'citas', component: CitasComponent },  // Página de citas
-  { path: 'login', component: LoginComponent },  // Página de login
-  { path: 'registro', component: RegistroComponent },  // Página de registro
+  { path: '', component: MainContentComponent }, // Página principal
+  { path: 'mascotas', component: MascotasComponent }, // Página de mascotas
+  { path: 'consultar-mascota/:id', component: ConsultarMascotaComponent }, // Ruta para consultar detalles de la mascota
+  { path: 'citas', component: CitasComponent }, // Página de citas
+  { path: 'login', component: LoginComponent }, // Página de login
+  { path: 'registro', component: RegistroComponent }, // Página de registro
   { path: 'ventas', component: VentasComponent },
   { path: 'usuarios', component: UsuariosComponent },
+  { path: 'consultar-usuario/:id', component: ConsultarUsuarioComponent }, // Nueva ruta para consultar detalles del usuario
 
   // Nuevas rutas para los componentes desplegables
   { path: 'registrar-mascota', component: RegistrarmascotaComponent },
@@ -29,7 +34,8 @@ export const routes: Routes = [
   { path: 'ventas-inventario', component: VentasinventarioComponent },
   { path: 'registrar-usuario', component: RegistrarusuarioComponent },
   { path: 'usuarios-activos', component: UsuariosactivosComponent },
-
+  // Nueva ruta para consultar citas
+  { path: 'consultar-cita/:id', component: ConsultarCitasComponent },
   // Ruta wildcard para manejar rutas no existentes
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

@@ -1,0 +1,162 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Contenedor principal */
+  div {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Títulos */
+  h2 {
+    color: #6a2c9c;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    color: #6a2c9c;
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Etiquetas */
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 1.1em;
+  }
+  
+  /* Campos de formulario */
+  input[type="text"],
+  input[type="date"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1em;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="number"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #6a2c9c;
+    box-shadow: 0 0 5px rgba(106, 44, 156, 0.4);
+    outline: none;
+  }
+  
+  /* Botones */
+  button {
+    background-color: #6a2c9c;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #5b2387;
+    transform: scale(1.05);
+  }
+  
+  button[type="submit"] {
+    width: auto; /* Para que el botón de guardar y cancelar no ocupe todo el ancho */
+  }
+  
+  button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  /* Estilos para la vista de detalles */
+  p {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+  
+  strong {
+    color: #6a2c9c;
+  }
+  
+  /* Estilos para la vista de edición */
+  textarea {
+    min-height: 100px;
+  }
+  
+  select {
+    font-size: 1.1em;
+  }
+  
+  h3 {
+    margin-top: 20px;
+  }
+  
+  /* Estilos para mostrar o no ciertos elementos dependiendo del rol */
+  div *[ngIf="role !== 'Client'"] {
+    display: block;
+  }
+  
+  /* Estilos para mostrar un mensaje si no se encuentra la cita */
+  p.no-cita {
+    text-align: center;
+    color: #777;
+    font-size: 1.2em;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  /* Diseño responsive para pantallas pequeñas */
+  @media (max-width: 768px) {
+    div {
+      padding: 15px;
+    }
+  
+    h2 {
+      font-size: 1.8em;
+    }
+  
+    h3 {
+      font-size: 1.4em;
+    }
+  
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    textarea,
+    select {
+      font-size: 1em;
+    }
+  
+    button {
+      font-size: 1em;
+    }
+  }
+  
