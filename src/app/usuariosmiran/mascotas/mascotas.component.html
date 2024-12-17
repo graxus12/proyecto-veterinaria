@@ -10,7 +10,7 @@
       <label for="busqueda">Búsqueda</label>
       <input id="busqueda" type="text" [(ngModel)]="busqueda" (ngModelChange)="filtrarMascotas()" placeholder="Buscar..." />
     </div>
-    <button class="nuevo">Nuevo</button>
+    <button class="nuevo" (click)="nuevoRegistro()">Nuevo</button>
   </div>
 
   <table class="tabla-mascotas" *ngIf="mascotasFiltradas.length > 0; else noMascotas">

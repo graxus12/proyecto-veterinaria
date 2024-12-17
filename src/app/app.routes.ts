@@ -13,29 +13,34 @@ import { VentasinventarioComponent } from './componentesdesplegables/ventasinven
 import { RegistrarusuarioComponent } from './componentesdesplegables/registrarusuario/registrarusuario.component';
 import { UsuariosactivosComponent } from './componentesdesplegables/usuariosactivos/usuariosactivos.component';
 import { ConsultarCitasComponent } from './usuariosmiran/citas/consultar-citas/consultar-citas/consultar-citas.component';
-
-// Importar el componente `ConsultarUsuarioComponent`
 import { ConsultarUsuarioComponent } from './admin/usuarios/consultar-usuario/consultar-usuario/consultar-usuario.component';
+
+// Importar la guardia de autenticación
+import { AuthGuard } from './services/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: MainContentComponent }, // Página principal
-  { path: 'mascotas', component: MascotasComponent }, // Página de mascotas
-  { path: 'consultar-mascota/:id', component: ConsultarMascotaComponent }, // Ruta para consultar detalles de la mascota
-  { path: 'citas', component: CitasComponent }, // Página de citas
-  { path: 'login', component: LoginComponent }, // Página de login
-  { path: 'registro', component: RegistroComponent }, // Página de registro
-  { path: 'ventas', component: VentasComponent },
-  { path: 'usuarios', component: UsuariosComponent },
-  { path: 'consultar-usuario/:id', component: ConsultarUsuarioComponent }, // Nueva ruta para consultar detalles del usuario
+  { path: 'login', component: LoginComponent }, // Página de login (sin guardia)
+  { path: 'registro', component: RegistroComponent }, // Página de registro (sin guardia)
+
+  // Rutas para los usuarios con rol "Cliente" (rol 3)
+  { path: 'mascotas', component: MascotasComponent, canActivate: [AuthGuard], data: { roles: ['3', '2', '1'] } }, // Página de mascotas
+  { path: 'consultar-mascota/:id', component: ConsultarMascotaComponent, canActivate: [AuthGuard], data: { roles: ['3', '2', '1'] } }, // Ruta para consultar detalles de la mascota
+  { path: 'registrar-mascota', component: RegistrarmascotaComponent, canActivate: [AuthGuard], data: { roles: ['3', '2', '1'] } }, // Ruta para registrar mascota
+  { path: 'citas', component: CitasComponent, canActivate: [AuthGuard], data: { roles: ['3', '2', '1'] } }, // Página de citas
+  { path: 'consultar-cita/:id', component: ConsultarCitasComponent, canActivate: [AuthGuard], data: { roles: ['3', '2', '1'] } }, // Ruta para consultar citas
+
+  // Rutas para los usuarios con otros roles (como Admin y Worker)
+  { path: 'ventas', component: VentasComponent, canActivate: [AuthGuard], data: { roles: ['1', '2'] } },
+  { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard], data: { roles: ['1', '2'] } },
+  { path: 'consultar-usuario/:id', component: ConsultarUsuarioComponent, canActivate: [AuthGuard], data: { roles: ['1', '2'] } },
 
   // Nuevas rutas para los componentes desplegables
-  { path: 'registrar-mascota', component: RegistrarmascotaComponent },
-  { path: 'consultar-venta', component: ConsultarventaComponent },
-  { path: 'ventas-inventario', component: VentasinventarioComponent },
-  { path: 'registrar-usuario', component: RegistrarusuarioComponent },
-  { path: 'usuarios-activos', component: UsuariosactivosComponent },
-  // Nueva ruta para consultar citas
-  { path: 'consultar-cita/:id', component: ConsultarCitasComponent },
+  { path: 'consultar-venta', component: ConsultarventaComponent, canActivate: [AuthGuard], data: { roles: ['1', '2'] } },
+  { path: 'ventas-inventario', component: VentasinventarioComponent, canActivate: [AuthGuard], data: { roles: ['1', '2'] } },
+  { path: 'registrar-usuario', component: RegistrarusuarioComponent, canActivate: [AuthGuard], data: { roles: ['1', '2'] } },
+  { path: 'usuarios-activos', component: UsuariosactivosComponent, canActivate: [AuthGuard], data: { roles: ['1', '2'] } },
+
   // Ruta wildcard para manejar rutas no existentes
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

@@ -29,68 +29,71 @@
    
   </div>
 
-  <!-- Vista para editar los detalles de la cita -->
-  <ng-template #editTemplate>
+    <!-- Vista para editar los detalles de la cita -->
 
-    <!-- Fecha -->
-    <div>
-      <label for="fecha">Fecha:</label>
-      <input type="date" [(ngModel)]="fechaSeleccionada" name="fecha" required id="fecha" (change)="updateAvailableHours()"/>
-    </div>
+<ng-template #editTemplate>
+  <!-- Fecha -->
+  < <div>
+    <label for="fecha">Fecha de Visita:</label>
+    <input type="date" [(ngModel)]="fechaSeleccionada" name="fecha" required id="fecha" (change)="updateConsultationDate()"/>
+  </div>
 
-    <!-- Hora -->
-    <div>
-      <label for="hora">Hora:</label>
-      <select [(ngModel)]="horaSeleccionada" name="hora" required id="hora" aria-label="Seleccionar hora">
-        <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora }}</option>
-      </select>
-    </div>
-
-    <label for="motivo">Motivo:</label>
-    <input id="motivo" [(ngModel)]="cita.motivo" type="text" placeholder="Motivo de la cita" />
-
-    <label for="estado">Estado:</label>
-    <select id="estado" [(ngModel)]="cita.estado" title="Seleccione el estado de la cita">
-      <option value="pendiente">Pendiente</option>
-      <option value="completada">Completada</option>
-      <option value="cancelada">Cancelada</option>
+  <!-- Hora -->
+  <div>
+    <label for="hora">Hora:</label>
+    <select [(ngModel)]="horaSeleccionada" name="hora" required id="hora" aria-label="Seleccionar hora">
+      <option *ngFor="let hora of horasDisponibles" [value]="hora">{{ hora }}</option>
     </select>
+  </div>
 
-    <h3>Detalles de la Mascota</h3>
-    <p><strong>Nombre de la Mascota:</strong> {{ cita.mascota_nombre }}</p>
+  <label for="motivo">Motivo:</label>
+  <input id="motivo" [(ngModel)]="cita.motivo" type="text" placeholder="Motivo de la cita" />
 
-    <h3>Historial de Consultas</h3>
-    <!-- Solo muestra y permite editar el historial si el rol no es "Client" -->
-    <div *ngIf="role !== 'Client'">
-      <label for="fecha-consulta">Fecha de Consulta:</label>
-      <input id="fecha-consulta" [(ngModel)]="cita.fecha_consulta" type="date" />
+  <label for="estado">Estado:</label>
+  <select id="estado" [(ngModel)]="cita.estado" title="Seleccione el estado de la cita">
+    <option value="pendiente">Pendiente</option>
 
-      <label for="motivo-consulta">Motivo de Consulta:</label>
-      <input id="motivo-consulta" [(ngModel)]="cita.motivo_consulta" type="text" placeholder="Motivo de consulta" />
+    <option value="completada">Completada</option>
+    
+    <option value="cancelada">Cancelada</option>
 
-      <label for="peso">Peso:</label>
-      <input id="peso" [(ngModel)]="cita.peso" type="number" step="0.01" placeholder="Peso en kg" />
+    
+  </select>
 
-      <label for="temperatura">Temperatura:</label>
-      <input id="temperatura" [(ngModel)]="cita.temperatura" type="number" step="0.01" placeholder="Temperatura en °C" />
+  <h3>Detalles de la Mascota</h3>
+  <p><strong>Nombre de la Mascota:</strong> {{ cita.mascota_nombre }}</p>
 
-      <label for="diagnostico">Diagnóstico:</label>
-      <textarea id="diagnostico" [(ngModel)]="cita.diagnostico" placeholder="Escriba el diagnóstico"></textarea>
+  <h3>Historial de Consultas</h3>
+  <div *ngIf="role !== 'Client'">
+    <label for="fecha-consulta">Fecha de Consulta:</label>
+    <input id="fecha-consulta" [(ngModel)]="cita.fecha_consulta" type="date" />
 
-      <label for="tratamiento">Tratamiento:</label>
-      <textarea id="tratamiento" [(ngModel)]="cita.tratamiento" placeholder="Escriba el tratamiento"></textarea>
+    <label for="motivo-consulta">Motivo de Consulta:</label>
+    <input id="motivo-consulta" [(ngModel)]="cita.motivo_consulta" type="text" placeholder="Motivo de consulta" />
 
-      <label for="sintomas">Síntomas:</label>
-      <textarea id="sintomas" [(ngModel)]="cita.sintomas" placeholder="Describa los síntomas"></textarea>
+    <label for="peso">Peso:</label>
+    <input id="peso" [(ngModel)]="cita.peso" type="number" step="0.01" placeholder="Peso en kg" />
 
-      <label for="medicinas-aplicadas">Medicinas Aplicadas:</label>
-      <textarea id="medicinas-aplicadas" [(ngModel)]="cita.medicinas_aplicadas" placeholder="Escriba las medicinas aplicadas"></textarea>
+    <label for="temperatura">Temperatura:</label>
+    <input id="temperatura" [(ngModel)]="cita.temperatura" type="number" step="0.01" placeholder="Temperatura en °C" />
 
-    </div>
+    <label for="diagnostico">Diagnóstico:</label>
+    <textarea id="diagnostico" [(ngModel)]="cita.diagnostico" placeholder="Escriba el diagnóstico"></textarea>
 
-    <button (click)="saveChanges()">Guardar</button>
-    <button (click)="cancelEditMode()">Cancelar</button>
-  </ng-template>
+    <label for="tratamiento">Tratamiento:</label>
+    <textarea id="tratamiento" [(ngModel)]="cita.tratamiento" placeholder="Escriba el tratamiento"></textarea>
+
+    <label for="sintomas">Síntomas:</label>
+    <textarea id="sintomas" [(ngModel)]="cita.sintomas" placeholder="Describa los síntomas"></textarea>
+
+    <label for="medicinas-aplicadas">Medicinas Aplicadas:</label>
+    <textarea id="medicinas-aplicadas" [(ngModel)]="cita.medicinas_aplicadas" placeholder="Escriba las medicinas aplicadas"></textarea>
+  </div>
+
+  <button (click)="saveChanges()">Guardar</button>
+  <button (click)="cancelEditMode()">Cancelar</button>
+ 
+</ng-template>
 </div>
 
 <div *ngIf="!cita">

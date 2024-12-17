@@ -16,6 +16,24 @@
     <button type="submit">Aplicar Filtros</button>
   </form>
 
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMensaje" class="error-message">
+    {{ errorMensaje }}
+  </div>
+
+  <!-- Botón para generar reporte -->
+  <button *ngIf="filtros.fecha_inicio && filtros.fecha_fin" (click)="generarReporte()">Generar Reporte</button>
+
+<!-- Mensaje de éxito y botón para ver el reporte -->
+<div *ngIf="reporteUrl" class="mensaje-reporte">
+  <div class="reporte-exito">
+    Reporte generado con éxito.
+  </div>
+  <a [href]="reporteUrl" target="_blank">
+    <button class="ver-reporte-btn">Ver Reporte</button>
+  </a>
+</div>
+
   <!-- Lista de ventas -->
   <table *ngIf="ventas.length > 0">
     <thead>
@@ -64,3 +82,4 @@
     <button (click)="ocultarDetalles()">Ocultar Detalles</button>
   </div>
 </div>
+

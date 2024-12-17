@@ -16,6 +16,7 @@ export class VentasComponent {
   totalVenta: number = 0;
   montoPago: number = 0;  // Monto con el que paga el usuario
   cambio: number = 0;  // El cambio que se le dará al usuario
+  facturaUrl: string | null = null; // Variable para la URL de la factura
 
   // Variables para el formulario de servicio
   mostrarFormularioServicio: boolean = false;
@@ -44,13 +45,21 @@ export class VentasComponent {
     }
   }
 
-  // Método para agregar el producto a la lista de venta
   agregarProductoVenta(producto: any) {
     const productoExistente = this.productosVenta.find(p => p.codigo_barras === producto.codigo_barras);
+  
     if (productoExistente) {
-      productoExistente.cantidad += 1;  // Aumentar la cantidad si ya existe
+      if (productoExistente.cantidad < producto.stock) {
+        productoExistente.cantidad += 1;  // Aumentar la cantidad si hay suficiente stock
+      } else {
+        alert(`No hay suficiente stock de ${producto.nombre}. Solo hay ${producto.stock} disponibles.`);
+      }
     } else {
-      this.productosVenta.push({ ...producto, cantidad: 1, total: producto.precio });
+      if (producto.stock > 0) {
+        this.productosVenta.push({ ...producto, cantidad: 1, total: producto.precio });
+      } else {
+        alert(`No hay stock disponible para ${producto.nombre}.`);
+      }
     }
     this.calcularTotalVenta();
   }
@@ -75,13 +84,17 @@ export class VentasComponent {
     }
   }
 
-  // Método para recalcular el total de la venta
-  calcularTotalVenta() {
-    this.totalVenta = this.productosVenta.reduce((total, item) => {
-      item.total = item.precio * item.cantidad;  // Calcular total por producto o servicio
-      return total + item.total;  // Sumar al total general
-    }, 0);
-  }
+ // Método para recalcular el total de la venta
+calcularTotalVenta() {
+  this.totalVenta = this.productosVenta.reduce((total, item) => {
+    if (item.cantidad > item.stock) {
+      item.cantidad = item.stock;  // Limitar la cantidad a lo que hay en stock
+      alert(`La cantidad de ${item.nombre} ha sido limitada al stock disponible: ${item.stock}`);
+    }
+    item.total = item.precio * item.cantidad;  // Calcular total por producto o servicio
+    return total + item.total;  // Sumar al total general
+  }, 0);
+}
 
   // Método para eliminar un producto o servicio de la lista de venta
   eliminarProducto(item: any) {
@@ -110,35 +123,42 @@ export class VentasComponent {
     }
   }
 
-  // Método para registrar la venta
-  registrarVenta() {
-    if (this.productosVenta.length > 0) {
-      const ventaData = {
-        productos: this.productosVenta.map(p => ({
-          codigo_barras: p.codigo_barras,
-          nombre: p.nombre,
-          cantidad: p.cantidad,
-          precio: p.precio,
-          total: p.total
-        })),
-        total: this.totalVenta
-      };
+// Método para registrar la venta
+registrarVenta() {
+  if (this.productosVenta.length > 0) {
+    const ventaData = {
+      productos: this.productosVenta.map(p => ({
+        codigo_barras: p.codigo_barras,
+        nombre: p.nombre,
+        cantidad: p.cantidad,
+        precio: p.precio,
+        total: p.total
+      })),
+      total: this.totalVenta,
+      monto_pago: this.montoPago  // Asegúrate de incluir este campo
+    };
 
-      this.ventasService.registrarVenta(ventaData).subscribe(
-        (response) => {
-          alert('Venta registrada exitosamente');
-          this.productosVenta = [];
-          this.totalVenta = 0;
-          this.montoPago = 0;
-          this.cambio = 0;
-        },
-        (error) => {
-          console.error('Error al registrar la venta', error);
-          alert('Error al registrar la venta');
+    this.ventasService.registrarVenta(ventaData).subscribe(
+      (response: any) => {
+        alert('Venta registrada exitosamente');
+        this.productosVenta = [];
+        this.totalVenta = 0;
+        this.montoPago = 0;
+        this.cambio = 0;
+
+        // Si la respuesta contiene la URL de la factura, la guardamos
+        if (response.factura_url) {
+          this.facturaUrl = response.factura_url;
         }
-      );
-    } else {
-      alert('Debe agregar productos o servicios para registrar la venta');
-    }
+      },
+      (error) => {
+        console.error('Error al registrar la venta', error);
+        alert('Error al registrar la venta');
+      }
+    );
+  } else {
+    alert('Debe agregar productos o servicios para registrar la venta');
   }
+}
+
 }

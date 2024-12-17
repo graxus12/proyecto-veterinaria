@@ -59,7 +59,7 @@ export class MascotasComponent implements OnInit {
       },
       error => {
         console.error('Error al obtener las mascotas:', error);
-        alert('Error al obtener las mascotas');
+        
       }
     );
   }
@@ -87,5 +87,9 @@ export class MascotasComponent implements OnInit {
 
   verDetalles(mascota: any): void {
     this.router.navigate(['/consultar-mascota', mascota.id]);
+  }
+
+  nuevoRegistro(): void {
+    this.router.navigate(['/registrar-mascota']);
   }
 }

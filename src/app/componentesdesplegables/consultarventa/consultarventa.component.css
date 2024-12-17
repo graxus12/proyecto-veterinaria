@@ -1,13 +1,13 @@
 /* Estilos generales para el contenedor principal */
 .consultar-ventas {
-  width: 100%;
-  max-width: 1200px;
-  margin: 40px auto 20px; /* Se añadió margen superior para separarlo del header */
+  max-width: 800px;
+  margin: 20px auto;
   padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  font-family: Arial, sans-serif;
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más suave */
+  font-family: 'Arial', sans-serif;
+  border: 1px solid #ddd; /* Borde suave alrededor del contenedor */
 }
 
 /* Estilos para el título */
@@ -81,7 +81,7 @@
 }
 
 .consultar-ventas table button {
-  background-color: #3498db; /* Azul para el botón de ver detalles */
+  background-color: #4c357a;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -91,7 +91,7 @@
 }
 
 .consultar-ventas table button:hover {
-  background-color: #2980b9; /* Azul más oscuro */
+  background-color: #4c357a;
 }
 
 /* Estilos para los detalles de la venta */
@@ -122,7 +122,7 @@
 }
 
 .consultar-ventas .venta-detalles button {
-  background-color: #e74c3c; /* Rojo para el botón de ocultar detalles */
+  background-color: #4c357a;
   color: white;
   border: none;
   padding: 10px;
@@ -133,5 +133,51 @@
 }
 
 .consultar-ventas .venta-detalles button:hover {
-  background-color: #c0392b; /* Rojo más oscuro */
+  background-color: #4c357a;
+}
+
+/* Estilos para el mensaje de error */
+.error-message {
+  color: #4c357a;
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Estilos para el mensaje de éxito */
+.reporte-exito {
+  background-color: #e7f9e7; /* Fondo verde claro */
+  color: #2d6a4f; /* Texto verde oscuro */
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #2d6a4f;
+}
+
+/* Estilos para el botón de "Ver Reporte" */
+.ver-reporte-btn {
+  background-color: #2d6a4f; /* Verde oscuro */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.ver-reporte-btn:hover {
+  background-color: #1b4d3a; /* Verde más oscuro al pasar el mouse */
+}
+
+/* Asegurarse de que el mensaje y el botón se alineen correctamente */
+.consultar-ventas .mensaje-reporte {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

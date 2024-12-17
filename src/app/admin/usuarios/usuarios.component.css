@@ -1,13 +1,13 @@
 /* Estilo para el contenedor principal */
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-top: 80px; /* Ajusta este valor según la altura de tu header */
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más suave */
+  font-family: 'Arial', sans-serif;
+  border: 1px solid #ddd; /* Borde suave alrededor del contenedor */
   }
   
   /* Estilos para el título */
@@ -34,9 +34,11 @@
   /* Estilos para la tabla */
   .table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border: 1px solid #ddd;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra alrededor de la tabla */
   }
   
   .table th, .table td {

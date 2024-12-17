@@ -14,9 +14,12 @@ import { FormsModule } from '@angular/forms';
 export class UsuariosComponent implements OnInit {
   usuarios: any[] = [];  // Lista completa de usuarios
   filteredUsuarios: any[] = [];  // Lista de usuarios filtrados
+  usuariosPaginados: any[] = [];  // Lista de usuarios paginados
   loading: boolean = true;  // Indicador de carga
   errorMessage: string = '';  // Mensaje de error
   searchQuery: string = '';  // Valor de la búsqueda
+  cantidadMostrar: number = 10;  // Número de usuarios a mostrar
+  opcionesCantidad: number[] = [5, 10, 20, 50];  // Opciones para la cantidad a mostrar
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -30,6 +33,7 @@ export class UsuariosComponent implements OnInit {
         (data) => {
           this.usuarios = data;  // Cargar usuarios en la propiedad
           this.filteredUsuarios = data;  // Inicialmente, mostrar todos los usuarios
+          this.actualizarCantidad();  // Actualizar paginación
           this.loading = false;
         },
         (error) => {
@@ -50,9 +54,18 @@ export class UsuariosComponent implements OnInit {
     } else {
       this.filteredUsuarios = this.usuarios;
     }
+    this.actualizarCantidad();  // Actualizar lista paginada después de filtrar
+  }
+
+  actualizarCantidad(): void {
+    this.usuariosPaginados = this.filteredUsuarios.slice(0, this.cantidadMostrar);
   }
 
   consultarUsuario(id: number): void {
     this.router.navigate(['/consultar-usuario', id]); // Redirige al componente de detalles
+  }
+
+  agregarUsuario(): void {
+    this.router.navigate(['/nuevo-usuario']); // Redirige al componente de nuevo usuario
   }
 }

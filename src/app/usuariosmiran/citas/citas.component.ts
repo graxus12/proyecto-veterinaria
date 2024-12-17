@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/services/auth.service';
-import { RouterModule } from '@angular/router';  // Asegúrate de importar RouterModule
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-citas',
   standalone: true,
-  imports: [CommonModule, FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './citas.component.html',
   styleUrls: ['./citas.component.css']
 })
@@ -19,7 +19,7 @@ export class CitasComponent implements OnInit {
   usuarios: any[] = [];
   mascotas: any[] = [];
   citas: any[] = [];
-  availableHours: string[] = [];  // Horas disponibles
+  availableHours: string[] = [];
   selectedUsuario: number | null = null;
   selectedMascota: number | null = null;
   selectedFecha: string = '';
@@ -28,9 +28,10 @@ export class CitasComponent implements OnInit {
   submitted: boolean = false;
   successMessage: string = '';
   errorMessage: string = '';
-
-  minDate: string = ''; // Fecha mínima (hoy)
-  maxDate: string = ''; // Fecha máxima (dentro de 2 semanas)
+  minDate: string = '';
+  maxDate: string = '';
+  searchFecha: string = '';  // Variable para la búsqueda por fecha
+  searchEstado: string = '';  // Variable para el filtro por estado
 
   constructor(
     private http: HttpClient,
@@ -43,14 +44,13 @@ export class CitasComponent implements OnInit {
     this.role = userData.role;
     this.userId = userData.id;
 
-    // Si el rol es admin o trabajador, cargar todos los usuarios
     if (this.role === '1' || this.role === '2') {
       this.loadUsuarios();
     }
 
     this.loadMascotas();
     this.loadCitas();
-    this.setFechaLimite(); // Establecer el rango de fechas
+    this.setFechaLimite();
   }
 
   setFechaLimite(): void {
@@ -58,14 +58,14 @@ export class CitasComponent implements OnInit {
     this.minDate = this.formatDate(today);
 
     const maxDate = new Date();
-    maxDate.setDate(today.getDate() + 14);  // Aumentar 14 días
+    maxDate.setDate(today.getDate() + 14);
     this.maxDate = this.formatDate(maxDate);
   }
 
   formatDate(date: Date): string {
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Añadir cero al mes si es un solo dígito
-    const day = date.getDate().toString().padStart(2, '0'); // Añadir cero al día si es un solo dígito
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
 
@@ -91,27 +91,34 @@ export class CitasComponent implements OnInit {
         next: (data) => {
           this.mascotas = data;
           if (this.selectedFecha) {
-            this.updateAvailableHours();  // Actualizar horas disponibles si ya se ha seleccionado una fecha
+            this.updateAvailableHours();
           }
         },
         error: (err) => console.error('Error al cargar las mascotas:', err),
       });
     }
   }
-
   loadCitas(): void {
     let url = '';
     if (this.role === '1' || this.role === '2') {
       url = 'http://localhost/api/citas/citas_admin.php';
     } else if (this.role === '3') {
-      url = `http://localhost/api/citas/citas_usuario.php?user_id=${this.userId}`;
+      // Agregar parámetros de filtro si están definidos
+      let queryParams = `?user_id=${this.userId}`;
+      if (this.searchFecha) {
+        queryParams += `&fecha=${this.searchFecha}`;
+      }
+      if (this.searchEstado) {
+        queryParams += `&estado=${this.searchEstado}`;
+      }
+      url = `http://localhost/api/citas/citas_usuario.php${queryParams}`;
     }
-
+  
     if (url) {
       this.http.get<any[]>(url).subscribe({
         next: (data) => {
           this.citas = data;
-          this.updateAvailableHours(); // Actualizar las horas disponibles
+          this.filterCitas();  // Aplicar filtros al cargar las citas
         },
         error: (err) => console.error('Error al cargar las citas:', err),
       });
@@ -119,7 +126,7 @@ export class CitasComponent implements OnInit {
   }
 
   updateAvailableHours(): void {
-    if (!this.selectedFecha) return;  // Verifica si la fecha está seleccionada
+    if (!this.selectedFecha) return;
     this.http.get<any>(`http://localhost/api/citas/obtener_horas_disponibles.php?fecha=${this.selectedFecha}`).subscribe({
       next: (data) => {
         this.availableHours = data.available_hours;
@@ -129,9 +136,32 @@ export class CitasComponent implements OnInit {
       }
     });
   }
-  
-  
 
+  filterCitas(): void {
+    let filteredCitas = [...this.citas];  // Copiar las citas para no modificar la lista original
+  
+    // Filtrar por fecha
+    if (this.searchFecha) {
+      filteredCitas = filteredCitas.filter(cita => cita.fecha_visita === this.searchFecha);
+    }
+  
+    // Filtrar por estado
+    if (this.searchEstado) {
+      filteredCitas = filteredCitas.filter(cita => cita.estado === this.searchEstado);
+    }
+  
+    // Si el rol es 'usuario' (role 3), filtrar las citas canceladas
+    if (this.role === '3') {
+      filteredCitas = filteredCitas.filter(cita => cita.estado !== 'cancelada');
+    }
+  
+    // Si el estado seleccionado es 'Todos', mostrar todas las citas activas (no canceladas)
+    if (this.searchEstado === 'Todos') {
+      filteredCitas = filteredCitas.filter(cita => cita.estado !== 'cancelada');
+    }
+  
+    this.citas = filteredCitas;
+  }
   createCita(): void {
     if (!this.selectedFecha || !this.selectedHora || !this.selectedMascota || !this.motivo) {
       this.errorMessage = 'Por favor, completa todos los campos antes de enviar.';
@@ -155,7 +185,7 @@ export class CitasComponent implements OnInit {
       next: (response) => {
         this.successMessage = '¡Cita registrada con éxito!';
         this.errorMessage = '';
-        this.loadCitas(); // Recargar las citas para actualizar las horas disponibles
+        this.loadCitas();
         this.submitted = true;
       },
       error: (err) => {
@@ -170,12 +200,10 @@ export class CitasComponent implements OnInit {
     if (!this.selectedHora) return false;
     const hora = parseInt(this.selectedHora.split(':')[0], 10);
 
-    // Verificar que la hora esté dentro del rango permitido
     if (hora < 8 || hora >= 21 || !this.selectedHora.endsWith(':00')) {
       return false;
     }
 
-    // Verificar que la hora seleccionada esté en las horas disponibles
     const horaSeleccionada = this.availableHours.includes(this.selectedHora);
     if (!horaSeleccionada) {
       return false;
@@ -184,11 +212,9 @@ export class CitasComponent implements OnInit {
     return true;
   }
 
- // Método para eliminar una cita
   EliminarCita(idCita: number): void {
     this.http.delete(`http://localhost/api/citas/eliminar_cita.php?id_cita=${idCita}`).subscribe({
       next: (response) => {
-        // Si la cita se elimina correctamente, eliminarla de la lista
         console.log('Cita eliminada:', response);
         this.citas = this.citas.filter(cita => cita.id_cita !== idCita);
       },

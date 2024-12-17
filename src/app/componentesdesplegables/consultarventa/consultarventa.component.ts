@@ -16,19 +16,37 @@ export class ConsultarventaComponent {
   ventaDetalles: any = {}; // Detalles de la venta seleccionada
   ventaSeleccionada: number | null = null; // ID de la venta seleccionada
   detallesVisible: boolean = false; // Para controlar si mostrar u ocultar los detalles
+  errorMensaje: string = ''; // Mensaje de error
+  reporteUrl: string | null = null; // URL del reporte generado
 
   constructor(private ventasService: VentasService) {}
 
   // Método para aplicar los filtros de fecha y obtener las ventas
   aplicarFiltros() {
     const { fecha_inicio, fecha_fin } = this.filtros;
-    if (fecha_inicio && fecha_fin) {
-      this.ventasService.filtrarVentas(fecha_inicio, fecha_fin).subscribe((ventas: any) => {
-        this.ventas = ventas;
-      });
-    } else {
-      alert('Por favor, ingrese ambas fechas.');
+
+    // Validación de fechas
+    if (!fecha_inicio || !fecha_fin) {
+      this.errorMensaje = 'Por favor, ingrese ambas fechas.';
+      return;
     }
+
+    const fechaInicio = new Date(fecha_inicio);
+    const fechaFin = new Date(fecha_fin);
+
+    // Validar que la fecha de inicio no sea posterior a la fecha de fin
+    if (fechaInicio > fechaFin) {
+      this.errorMensaje = 'La fecha de inicio no puede ser posterior a la fecha de fin.';
+      return;
+    }
+
+    // Limpiar mensaje de error si las fechas son válidas
+    this.errorMensaje = '';
+
+    // Si las fechas son válidas, hacer la solicitud
+    this.ventasService.filtrarVentas(fecha_inicio, fecha_fin).subscribe((ventas: any) => {
+      this.ventas = ventas;
+    });
   }
 
   // Método para ver los detalles de una venta
@@ -49,5 +67,25 @@ export class ConsultarventaComponent {
   ocultarDetalles() {
     this.detallesVisible = false;
     this.ventaSeleccionada = null; // Restablecemos la venta seleccionada
+  }
+
+  // Método para generar el reporte de ventas
+  generarReporte() {
+    const { fecha_inicio, fecha_fin } = this.filtros;
+
+    // Validación de fechas
+    if (!fecha_inicio || !fecha_fin) {
+      this.errorMensaje = 'Por favor, ingrese ambas fechas.';
+      return;
+    }
+
+    this.ventasService.generarReporteVentas(fecha_inicio, fecha_fin).subscribe(
+      (response: any) => {
+        this.reporteUrl = response.reporte_url; // Guardamos la URL del reporte
+      },
+      (error) => {
+        this.errorMensaje = 'Error al generar el reporte. Inténtalo nuevamente.';
+      }
+    );
   }
 }

@@ -45,7 +45,7 @@ export class RegistrarusuarioComponent {
       estado: this.usuario.estado
     };
 
-    this.http.post('http://localhost/api/registrar_usuario.php', usuarioData).subscribe(
+    this.http.post('http://localhost/api/registrar_usuario_admin.php', usuarioData).subscribe(
       (response: any) => {
         alert('Usuario registrado exitosamente');
         this.router.navigate(['/usuarios']);

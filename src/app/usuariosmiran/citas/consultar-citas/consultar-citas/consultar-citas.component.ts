@@ -91,7 +91,27 @@ export class ConsultarCitasComponent implements OnInit, OnDestroy {
   }
 
   saveChanges() {
-    this.http.post('http://localhost/api/citas/actualizar_cita.php', this.cita)
+    // Asegúrate de que la cita contiene todos los datos necesarios antes de enviarlos
+    const citaData = {
+      id_cita: this.cita.id_cita,
+      fecha_visita: this.fechaSeleccionada,
+      hora_cita: this.horaSeleccionada,
+      motivo: this.cita.motivo,
+      estado: this.cita.estado,
+      fecha_consulta: this.cita.fecha_consulta, // La fecha de consulta debe coincidir con la fecha de visita
+      motivo_consulta: this.cita.motivo_consulta || '', // Si no hay motivo, lo dejamos vacío
+      peso: this.cita.peso || '', // Si no hay peso, lo dejamos vacío
+      temperatura: this.cita.temperatura || '', // Si no hay temperatura, lo dejamos vacío
+      diagnostico: this.cita.diagnostico || '', // Si no hay diagnóstico, lo dejamos vacío
+      tratamiento: this.cita.tratamiento || '', // Si no hay tratamiento, lo dejamos vacío
+      sintomas: this.cita.sintomas || '', // Si no hay síntomas, lo dejamos vacío
+      medicinas_aplicadas: this.cita.medicinas_aplicadas || '' // Si no hay medicinas aplicadas, lo dejamos vacío
+    };
+  
+    // Verificar los datos antes de enviarlos
+    console.log('Datos a enviar al backend:', citaData);
+  
+    this.http.post('http://localhost/api/citas/actualizar_cita.php', citaData)
       .subscribe(
         response => {
           console.log('Cita actualizada exitosamente', response);
@@ -101,6 +121,11 @@ export class ConsultarCitasComponent implements OnInit, OnDestroy {
           console.error('Error al actualizar la cita', error);
         }
       );
+  }
+  
+  updateConsultationDate() {
+    // Cuando se actualiza la fecha de visita, la fecha de consulta también debe actualizarse
+    this.cita.fecha_consulta = this.fechaSeleccionada;
   }
 
   cancelEditMode() {

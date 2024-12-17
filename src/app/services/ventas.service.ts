@@ -50,4 +50,10 @@ export class VentasService {
   actualizarServicio(servicio: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}actualizar_servicio.php?id=${servicio.id}`, servicio);
   }
+
+  // Método para generar el reporte de ventas
+generarReporteVentas(fecha_inicio: string, fecha_fin: string): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}generar_reportes_ventas.php`, { fecha_inicio, fecha_fin });
+}
+
 }
